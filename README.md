@@ -16,17 +16,26 @@ In order to use this tool to check for permissions the user needs to **have the 
 pip3 install -r requirements.txt
 
 # Help
-python3 bf-aws-perms-simulate.py -h
-usage: bf-aws-perms-simulate.py [-h] --profile PROFILE [--arn ARN]
+usage: bf-aws-perms-simulate.py [-h] --profile PROFILE --region REGION [--arn ARN] [--services SERVICES]
 
 Asks AWS permissions for a user using simulatePrincipalPolicy
 
-optional arguments:
-  -h, --help         show this help message and exit
-  --profile PROFILE  AWS profile name to use
-  --arn ARN          User/Role ARN to check permissions for (by defaults uses
-                     current user)
+options:
+  -h, --help           show this help message and exit
+  --profile PROFILE    AWS profile name to use
+  --arn ARN            User/Role ARN to check permissions for (by
+                       defaults uses current user)
+  --services SERVICES  Comma separated list of services to check
+                       permissions for (e.g. s3,ec2,secretsmanager)
+  --action ACTION      Specific action to check (e.g. s3:GetObject)
+  --resource RESOURCE  Specific resource to check (e.g.
+                       arn:aws:secretsmanager:us-
+                       east-1:123456789098:secret:secret_name)
 
 # Replace <AWS_PROFILE> with the name of the AWS profile you want to use. If you don't provide a <USER_ARN>, the script will use the ARN of the profile.
-python3 aws_permissions_checker.py --profile <AWS_PROFILE> [--arn <USER_ARN>]
+python3 aws_permissions_checker.py --profile <AWS_PROFILE> [--arn <USER_ARN>] [--services <SERVICES>] [--action <ACTION>] [--resource <RESOURCE>]
 ```
+
+- Use `--services` to check permissions only for specific services.
+- Use `--action` to check permissions only for the specific action indicated.
+- Use `--resource` to check permissions only over the specific resource indicated.
